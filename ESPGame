@@ -1,0 +1,91 @@
+/*
+ * Class: CMSC203 20932
+ * Instructor: Professor Tarek 
+ * Description: Color Guesses 
+ * Due: 9/18/2024
+ * Platform/compiler: Eclipse 
+ * I pledge that I have completed the programming assignment 
+* independently. I have not copied the code from a student or   * any source. I have not given my code to any student.
+ * Print your Name here: Bereket Asmerom 
+*/
+
+package espGame;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class ESPGame {
+    public static void main(String[] args) {
+
+    	final String RED_COLOR = "Red";
+        final String BLUE_COLOR = "Blue";
+        final String PINK_COLOR = "Pink";
+        final String PURPLE_COLOR = "Purple";
+        final String GREEN_COLOR = "Green";
+        final String WHITE_COLOR = "White";
+        final String BLACK_COLOR = "Black";
+
+
+        Scanner scanner = new Scanner(System.in);
+        Random randomizer = new Random();
+
+        String playerName, playerBio, userColorGuess = null, randomColor = "";
+        int successfulGuesses = 0;
+        final int TOTAL_ROUNDS = 11;
+
+        System.out.print("Enter your full name: ");
+        playerName = scanner.nextLine();
+        System.out.print("Tell us a little about yourself: ");
+        playerBio = scanner.nextLine();
+        System.out.print("Provide the due date (MM/DD/YY): ");
+        String dueDate = scanner.nextLine();
+        System.out.println();
+
+        for (int round = 1; round <= TOTAL_ROUNDS; round++) {
+            boolean validInput = false;
+
+            System.out.println("This is round " + round);
+            System.out.println();
+
+            while (!validInput) {
+                System.out.println("I have a color in mind.\n" +
+                        "Is it Red, Green, Blue, Pink, White, Purple or Black?\n" +
+                        "What's your guess? ");
+                userColorGuess = scanner.nextLine();
+
+                if (userColorGuess.equalsIgnoreCase(RED_COLOR) || userColorGuess.equalsIgnoreCase(BLUE_COLOR) ||
+                    userColorGuess.equalsIgnoreCase(PINK_COLOR) || userColorGuess.equalsIgnoreCase(GREEN_COLOR) ||
+                    userColorGuess.equalsIgnoreCase(WHITE_COLOR) || userColorGuess.equalsIgnoreCase(BLACK_COLOR) ||
+                    userColorGuess.equalsIgnoreCase(PURPLE_COLOR)) {
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid guess! Please enter a valid color from the list.\n");
+                }
+            }
+
+            int chosenNumber = randomizer.nextInt(7);
+            if (chosenNumber == 0) randomColor = RED_COLOR;
+            else if (chosenNumber == 1) randomColor = PINK_COLOR;
+            else if (chosenNumber == 2) randomColor = WHITE_COLOR;
+            else if (chosenNumber == 3) randomColor = BLUE_COLOR;
+            else if (chosenNumber == 4) randomColor = GREEN_COLOR;
+            else if (chosenNumber == 5) randomColor = BLACK_COLOR;
+            else if (chosenNumber == 6) randomColor = PURPLE_COLOR;
+
+            System.out.println("The color I was thinking of was " + randomColor);
+
+            if (userColorGuess.equalsIgnoreCase(randomColor)) {
+                successfulGuesses++;
+            }
+            System.out.println();
+        }
+
+        System.out.println("You successfully guessed " + successfulGuesses + " out of " + TOTAL_ROUNDS + " rounds.");
+        System.out.println();
+        System.out.println("Name: " + playerName);
+        System.out.println("Bio: " + playerBio);
+        System.out.println("Due Date: " + dueDate);
+
+        scanner.close();
+    }
+}
